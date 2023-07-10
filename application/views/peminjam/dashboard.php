@@ -23,7 +23,7 @@ endforeach;
     <div class="container">
       <a href="index.php" class="navbar-brand">
 
-        <span class="brand-text font-weight-light">Siplabs</span>
+        <span class="brand-text font-weight-light">Aplikasi Peminjaman Komputer</span>
       </a>
 
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,9 +62,9 @@ endforeach;
             <h1 class="m-0 text-dark"> Ruangan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-            </ol>
+            </ol> -->
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

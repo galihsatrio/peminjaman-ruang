@@ -233,7 +233,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="nip" name="nip" class="form-control" onkeypress="return isNumberKey(event)" onkeyup="return ceknip()" placeholder="NIP/NIS">
+                        <input type="text" id="nip" name="nip" class="form-control" onkeypress="return isNumberKey(event)" onkeyup="return ceknip()" placeholder="NIM Mahasiswa">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-sort-numeric-up-alt"></span>
@@ -298,10 +298,11 @@
                             <label>Keterangan Peminjaman</label>
                             <select name="keterangan" id="keterangan" class="form-control">
                                 <option value="Seminar">Seminar</option>
-                                <option value="OSIS">OSIS</option>
+                                <option value="Organisasi">Organisasi</option>
                                 <option value="Rapat">Rapat</option>
                                 <option value="Pelatihan/Workshop">Pelatihan/Workshop</option>
                                 <option value="Kegiatan Kepemimpinan">Kegiatan Kepemimpinan</option>
+                                <option value="Event Wibu">Event Wibu</option>
                             </select>
                         </div>
                     </div>
@@ -394,13 +395,13 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Lanjutkan?</h5>
+                <h3 class="modal-title">Peringatan</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Pilih 'logout' untuk keluar dari sistem</h5>
+                <p class="mb-0">Apakah anda yakin ingin keluar dari aplikasi?</p>
             </div>
             <div class="modal-footer">
                 <a href="<?php echo base_url('auth/logout') ?>" class="btn btn-danger">Logout</a>

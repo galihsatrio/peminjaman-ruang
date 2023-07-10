@@ -4,29 +4,18 @@ $jadwal = $this->db->query("SELECT * FROM jadwal INNER JOIN peminjaman, ruangan,
     AND peminjaman.id_user=user.id_user
     AND peminjaman.status_peminjaman!=0
     ")->result();
-    ?>
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1><?= $title; ?></h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#"><?= $title; ?></a></li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <div class="container-fluid mt-3">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2>LAPORAN JADWAL</h2>
-                </div>
-                <div class="card-body">
-                    <?php echo $this->session->flashdata('message'); ?>
+?>
+
+<div class="main-content">
+	<section class="section">
+		<div class="section-header">
+			<h1><?= $title; ?></h1>
+		</div>
+
+		<div class="section-body">
+			<div class="card card-primary">
+				<div class="card-body">
+					<?php echo $this->session->flashdata('message'); ?>
                     <div class="row">
                         <div class="col-md">
                             <label for="" class="badge badge-primary">Filter Bulan</label>
@@ -48,13 +37,13 @@ $jadwal = $this->db->query("SELECT * FROM jadwal INNER JOIN peminjaman, ruangan,
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="" class="badge badge-primary">FILTER TANGGAL</label>
+                                <label for="" class="badge badge-primary text-white">Filter TanggalL</label>
                                 <input type="date" id="filter_tanggal" class="form-control">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="" class="badge badge-primary">FILTER RANGE TANGGAL</label>
+                                <label for="" class="badge badge-primary text-white">Filter Periode</label>
                                 <div class="input-group">
                                     <input type="date" name="range_tanggal1" id="filter_tanggal1" class="form-control">
                                     <input type="date" name="range_tanggal2" id="filter_tanggal2" class="form-control">
@@ -99,7 +88,8 @@ $jadwal = $this->db->query("SELECT * FROM jadwal INNER JOIN peminjaman, ruangan,
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

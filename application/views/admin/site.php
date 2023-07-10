@@ -6,19 +6,19 @@
                 <div class="col-sm-6">
                     <h1><?= $title; ?></h1>
                 </div>
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#"><?= $root; ?></a></li>
                         <li class="breadcrumb-item active"><?= $title; ?></li>
                     </ol>
-                </div>
+                </div> -->
             </div>
         </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <?php echo $this->session->flashdata('message') ?>
                 <div class="callout callout-info">
@@ -53,11 +53,11 @@
                     </table>
                 <?php endforeach; ?>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-2">
 			<button class="btn btn-primary" data-toggle="modal" data-target="#adduser"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Lab</button>
-		</div><br><br>
+		</div><br>
         
         <div class="col-lg-12">
             <div class="container">
@@ -90,7 +90,7 @@
                                                 <td><?php echo $r->image ?></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-center">
+                                                <td colspan="4" class="text-center">
                                                     <a href="#" data-toggle="modal" data-target="#ubahruangan" data-id_ruangan="<?php echo $r->id_ruangan ?>" class="btn btn-primary">Ubah</a>
                                                 </td>
                                             </tr>

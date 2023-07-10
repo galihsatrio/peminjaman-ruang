@@ -1,90 +1,101 @@
-<div class="content-wrapper">
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1><?= $title; ?></h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#"><?= $title; ?></a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  <div class="container-fluid">
-    <div class="header">
-      <h1 class="text-center mt-3"><?php $nama_situs = $this->db->get('site')->result();
-                                    echo $nama_situs[0]->title ?></h1>
-      <h3 class="text-center">Selamat Datang, <?php echo $this->session->nama_lengkap; ?></h3>
-    </div>
-    <div class="card card-primary m-5">
-      <?php echo $this->session->flashdata('message'); ?>
+<div class="main-content">
+<section class="section">
+	<div class="section-header">
+		<h1><?= $title; ?></h1>
+	</div>
+
+	<div class="section-body">
+	<div class="container-fluid">
+    <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title"><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Quick View</h3>
       </div>
       <div class="card-body">
-        <div class="row">
+				<div class="row mb-5">
+					<div class="col-12">
+					<h1 class="text-center mt-3"><?php $nama_situs = $this->db->get('site')->result();
+                                    echo $nama_situs[0]->title ?></h1>
+					<h3 class="text-center">Selamat Datang, <?php echo $this->session->nama_lengkap; ?></h3>
+					<?php echo $this->session->flashdata('message'); ?>
+					</div>
+				</div>
+        <div class="row pt-5">
           <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <?php
-                $query = "SELECT count(*) as total FROM user WHERE status=0";
-                $result = $this->db->query($query)->result();
-                foreach ($result as $q) : ?>
-                  <h3><?php echo $q->total; ?></h3>
-                <?php endforeach; ?>
-                <p>Pendaftar baru</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <a href="<?php echo base_url('admin/newuser') ?>" class="small-box-footer">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+						<div class="card card-statistic-1">
+							<div class="card-icon bg-primary">
+								<i class="far fa-user"></i>
+							</div>
+							<div class="card-wrap">
+								<div class="card-header">
+									<h4>Pendaftar Baru</h4>
+								</div>
+								<div class="card-body">
+									<?php
+									$query = "SELECT count(*) as total FROM user WHERE status=0";
+									$result = $this->db->query($query)->result();
+									foreach ($result as $q) : ?>
+										<h3 class="mb-0"><?php echo $q->total; ?></ class="mb-0">
+									<?php endforeach; ?>
+								</div>
+								<p class="mb-2 text-right pr-3">
+									<a href="<?php echo base_url('admin/newuser') ?>">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
+								</p>
+							</div>
+						</div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <?php
+						<div class="card card-statistic-1">
+							<div class="card-icon bg-danger">
+								<i class="far fa-bookmark"></i>
+							</div>
+							<div class="card-wrap">
+								<div class="card-header">
+									<h4>Request Peminjaman</h4>
+								</div>
+								<div class="card-body">
+								<?php
                 $query = "SELECT count(*) as total FROM peminjaman WHERE status_peminjaman=0";
                 $result = $this->db->query($query)->result();
                 foreach ($result as $q) : ?>
                   <h3><?php echo $q->total; ?></h3>
                 <?php endforeach; ?>
-                <p>Request Peminjaman</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-bookmark"></i>
-              </div>
-              <a href="<?php echo base_url('admin/request') ?>" class="small-box-footer">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+								</div>
+								<p class="mb-2 text-right pr-3">
+									<a href="<?php echo base_url('admin/request') ?>">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
+								</p>
+							</div>
+						</div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <?php
-                $query = "SELECT count(*) as total FROM jadwal INNER JOIN peminjaman WHERE jadwal.id_peminjaman=peminjaman.id_peminjaman";
-                $result = $this->db->query($query)->result();
-                foreach ($result as $q) : ?>
-                  <h3><?php echo $q->total; ?></h3>
-                <?php endforeach; ?>
-                <p>Jadwal</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-calendar"></i>
-              </div>
-              <a href="<?php echo base_url('admin/jadwal') ?>" class="small-box-footer">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+						<div class="card card-statistic-1">
+							<div class="card-icon bg-warning">
+								<i class="far fa-calendar"></i>
+							</div>
+							<div class="card-wrap">
+								<div class="card-header">
+									<h4>Jadwal</h4>
+								</div>
+								<div class="card-body">
+									<?php
+									$query = "SELECT count(*) as total FROM jadwal INNER JOIN peminjaman WHERE jadwal.id_peminjaman=peminjaman.id_peminjaman";
+									$result = $this->db->query($query)->result();
+									foreach ($result as $q) : ?>
+										<h3><?php echo $q->total; ?></h3>
+									<?php endforeach; ?>
+								</div>
+								<p class="mb-2 text-right pr-3">
+									<a href="<?php echo base_url('admin/jadwal') ?>">Selebihnya <i class="fas fa-arrow-circle-right"></i></a>
+								</p>
+							</div>
+						</div>
           <!-- ./col -->
         </div>
       </div>
     </div>
   </div>
+	</div>
+</section>
 </div>

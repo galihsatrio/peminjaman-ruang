@@ -54,7 +54,7 @@ class Admin extends CI_Controller
 	public function users()
 	{
 		$data['root'] = "Manajemen Pengguna";
-		$data['title'] = "Users";
+		$data['title'] = "Data Mahasiswa";
 		$data['user'] = $this->session->userdata('id_user');
 		$data['username'] = $this->session->userdata('username');
 		$this->load->view('templates/header', $data);
@@ -372,7 +372,7 @@ class Admin extends CI_Controller
 	public function sitesetting()
 	{
 		$data['root'] = "Pengaturan";
-		$data['title'] = "Pengaturan situs";
+		$data['title'] = "Kelola Ruangan";
 		$data['user'] = $this->session->userdata('id_user');
 		$data['username'] = $this->session->userdata('username');
 		$data['site'] = $this->db->get('site')->result();

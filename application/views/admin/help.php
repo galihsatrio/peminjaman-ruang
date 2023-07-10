@@ -17,7 +17,7 @@
     </section>
 
     <!-- Main content -->
-    <div class="content">
+    <!-- <div class="content">
       <div class="container">
         <?php echo $this->session->flashdata('message'); ?>
         <div class="card">
@@ -81,7 +81,7 @@
             </div>
           </div>
         </div><!-- /.container-fluid -->
-      </div>
+      </div> -->
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

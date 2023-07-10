@@ -7,4 +7,4 @@
 			<td><?php echo $h->isi ?></td>
 		</tr>
 	</tbody>
-} ?>
+<?php } ?>
