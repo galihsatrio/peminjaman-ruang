@@ -39,6 +39,7 @@
               <div class="card-body">
 								<?php $site = $this->db->get('site')->result(); ?>
                 <form action="<?php echo base_url('auth') ?>" method="post" autocomplete="off">
+									<?php echo $this->session->flashdata('message'); ?>
                   <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="username" class="form-control" name="username" value="<?php echo set_value('username'); ?>" placeholder="Username">

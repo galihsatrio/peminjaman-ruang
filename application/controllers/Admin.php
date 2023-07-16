@@ -28,7 +28,7 @@ class Admin extends CI_Controller
 	public function newuser()
 	{
 		$data['root'] = "Manajemen Pengguna";
-		$data['title'] = "User Baru";
+		$data['title'] = "Pengguna Baru";
 		$data['user'] = $this->session->userdata('id_user');
 		$data['username'] = $this->session->userdata('username');
 		$this->load->view('templates/header', $data);
@@ -436,44 +436,133 @@ class Admin extends CI_Controller
 		redirect('admin/sitesetting', 'refresh');
 	}
 
-	public function ubahruangan()
+	public function room()
+	{
+		$data['root'] = "Manajemen Ruangan";
+		$data['title'] = "Manajemen Ruangan";
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/room', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function addroom()
+	{
+		$data['root'] = "Tambah Ruangan";
+		$data['title'] = "Tambah Ruangan";
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/roomCreate', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function storeRoom()
+	{
+		$kode_ruangan = $this->input->post('kode_ruangan');
+		$nama_ruangan = $this->input->post('nama_ruangan');
+		$status_ruangan = $this->input->post('status_ruangan');
+		$uploaded = $_FILES['image']['name'];
+		$imagetype = end(explode('.', $uploaded));
+		$image = uniqid() . '.' . $imagetype;
+
+		if (!empty($uploaded)) {
+			$config['upload_path'] = './files/site/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']  = '500';
+			$config['file_name'] = $image;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('image')) {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+				redirect('admin/room');
+			} else {
+				$array = [
+					'kode_ruangan' => $kode_ruangan,
+					'nama_ruangan' => $nama_ruangan,
+					'status_ruangan' => $status_ruangan,
+					'image' => $image
+				];
+				$this->upload->do_upload($image);
+				$this->db->insert('ruangan', $array);
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Ruangan berhasil ditambah!</div>');
+				redirect('admin/room');
+			}
+		} else {
+			$array = [
+				'kode_ruangan' => $kode_ruangan,
+				'nama_ruangan' => $nama_ruangan,
+				'status_ruangan' => $status_ruangan,
+				'image' => $image
+			];
+			$this->db->insert('ruangan', $array);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Ruangan berhasil ditambah!</div>');
+			redirect('admin/room');
+		}
+	}
+
+	public function editRoom($id)
+	{
+		$data['root'] = "Ubah Data Ruangan";
+		$data['title'] = "Ubah Data Ruangan";
+		$data['form'] = $this->db->query("select * from ruangan where id_ruangan='$id'")->result()[0];
+		$this->load->view('templates/header', $data);
+		$this->load->view("admin/roomEdit", $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function updateRoom()
 	{
 		$id_ruangan = $this->input->post('id_ruangan');
 		$kode_ruangan = $this->input->post('kode_ruangan');
 		$nama_ruangan = $this->input->post('nama_ruangan');
+		$status_ruangan = $this->input->post('status_ruangan');
+		$uploaded = $_FILES['image']['name'];
+		$searchType = explode('.', $uploaded);
+		$imagetype = end($searchType);
+		$image = uniqid() . '.' . $imagetype;
 
-		$config['upload_path'] = 'files/site/';
+		$config['upload_path'] = './files/site/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['file_name'] = uniqid();
+		$config['max_size']  = '500';
+		$config['file_name'] = $image;
 
 		$this->load->library('upload', $config);
+
 		$thisruangan = $this->db->get_where('ruangan', ['id_ruangan' => $id_ruangan])->row_array();
 
 		$cekkoderuangan = $this->db->query("select * from ruangan where kode_ruangan='$kode_ruangan' AND id_ruangan!=$id_ruangan")->row_array();
 		if ($cekkoderuangan) {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kode ruangan sudah ada!</div>');
-			redirect('admin/sitesetting');
+			redirect('admin/room');
 		} else {
-			if (!$this->upload->do_upload('gambar')) {
-				$gambar = ['file_name' => $thisruangan['image']];
+			if (!$this->upload->do_upload('image')) {
+				$image = $thisruangan['image'];
 			} else {
-				if (null !== ($thisruangan['image'])) {
+				if (isset($thisruangan['image']) && !empty($thisruangan['image'])) {
 					$path = 'files/site/' . $thisruangan['image'];
 					unlink($path);
 				}
-				$gambar = $this->upload->data();
+				$upload = $this->upload->data();
+				$image = $upload['file_name'];
 			}
-
 			$array = [
 				'kode_ruangan' => $kode_ruangan,
 				'nama_ruangan' => $nama_ruangan,
-				'image' => $gambar['file_name']
+				'status_ruangan' => $status_ruangan,
+				'image' => $image
 			];
 
 			$this->upload->do_upload();
 			$this->db->update('ruangan', $array, ['id_ruangan' => $id_ruangan]);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Ruangan diubah!</div>');
-			redirect('admin/sitesetting');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Ruangan berhasil ditambah!</div>');
+			redirect('admin/room');
 		}
+	}
+
+
+	public function deleteRoom($id_ruangan)
+	{
+		$this->db->delete('ruangan', array('id_ruangan' => $id_ruangan));
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Ruangan berhasil dihapus!</div>');
+		redirect('admin/room');
 	}
 }

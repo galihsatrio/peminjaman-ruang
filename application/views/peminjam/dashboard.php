@@ -62,6 +62,7 @@ endforeach;
 					</div>
 					<div class="card-body">
 						<div class="container">
+							<h4 class="text-left mb-5">Selamat Datang, <?php echo $this->session->nama_lengkap; ?></h4>
 							<?php echo $this->session->flashdata('message'); ?>
 							<div class="row">
 								<?php foreach ($ruangan as $r) : ?>

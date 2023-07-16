@@ -63,7 +63,6 @@ class Auth extends CI_Controller
 
 	public function mendaftar()
 	{
-
 		$nama_lengkap = htmlspecialchars($this->input->post('nama_lengkap'));
 		$username = htmlspecialchars($this->input->post('username'));
 		$password = htmlspecialchars($this->input->post('password'));
@@ -83,10 +82,14 @@ class Auth extends CI_Controller
 		];
 
 		$this->m_siplabs->add_data('user', $array);
-		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<h5><i class="icon fas fa-check"></i> Mendaftar berhasil!</h5>
-			<span>Harap tunggu konfirmasi admin untuk aktivasi</span></div>');
+		$this->session->set_flashdata('message', '
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close py-2 px-2" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<h6><i class="icon fas fa-check"></i> Berhasil Mendaftar!</h6>
+				<span>Harap tunggu konfirmasi admin untuk aktivasi.</span>
+				<a href="https://wa.me/6283857368821?text=Hai saya '. $nama_lengkap .', tolong konfirmasi ya"> atau klik disini untuk hubungi admin</a>
+			</div>
+		');
 		redirect('auth');
 	}
 
